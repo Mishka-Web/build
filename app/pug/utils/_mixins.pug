@@ -1,0 +1,34 @@
+mixin nav(items, cl='') 
+    - var cl = cl || ""
+    nav
+        ul 
+            each val, key in items
+                li
+                    if !cl == ""
+                        a(class=cl, href=val)= key
+                    else 
+                        a(href=val)= key
+
+mixin list(items)
+    ul 
+        each val in items
+            li= val
+
+mixin icon(name, cl, type='svg')
+    - var cl = cl || ""
+    if cl == ""
+        img(class=`icon`, src=`img/icons/${name}.${type}`, alt="", width='16', draggable='false')
+    else
+        img(class=`icon ${cl}`, src=`img/icons/${name}.${type}`, alt="", width='16', draggable='false')
+
+mixin btn-modal(modal="newModal", cl="btn", text="кнопка") 
+    button(class=cl, data-action="open-modal", data-modal=modal)= text
+
+mixin modal(id="newModal")
+    div(id=id, class="modal modal--animated")
+        .modal-container 
+            .modal-content.modal-content--centering.container  
+                .modal-inner-block
+                    button.modal-btn-close(type="button", data-action="modal-close")
+                        img(src="img/icons/close-popup.svg", alt="")
+                    block

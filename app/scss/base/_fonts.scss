@@ -1,0 +1,32 @@
+@include init-fonts((
+    "Montserrat": (
+        "Montserrat-Black": (
+            "font-weight": 900
+        ),
+        "Montserrat-Bold": (
+            "font-weight": 700
+        ),
+        "Montserrat-SemiBold": (
+            "font-weight": 600
+        ),
+        "Montserrat-Medium": (
+            "font-weight": 500
+        ),
+        "Montserrat-Regular": ()
+    ),
+    "Dosis": (
+        "Dosis-Black": (
+            "font-weight": 900
+        ),
+        "Dosis-Bold": (
+            "font-weight": 700
+        ),
+        "Dosis-SemiBold": (
+            "font-weight": 600
+        ),
+        "Dosis-Medium": (
+            "font-weight": 500
+        ),
+        "Dosis-Regular": ()
+    ),
+));

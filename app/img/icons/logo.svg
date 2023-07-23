@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="214.35809"
+   height="139.54387"
+   viewBox="0 0 214.35809 139.54387"
+   version="1.1"
+   id="SVGRoot"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs390">
+    <linearGradient
+       id="linearGradient1499">
+      <stop
+         style="stop-color:#ffcc00;stop-opacity:0.74853808;"
+         offset="0"
+         id="stop1495" />
+      <stop
+         style="stop-color:#ff6d8c;stop-opacity:0.75686282;"
+         offset="0.55051547"
+         id="stop1505" />
+      <stop
+         style="stop-color:#0000df;stop-opacity:0.12874252;"
+         offset="1"
+         id="stop1497" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient1491">
+      <stop
+         style="stop-color:#ff5555;stop-opacity:0.89473689;"
+         offset="0"
+         id="stop1487" />
+      <stop
+         style="stop-color:#e2ae6d;stop-opacity:1;"
+         offset="0.2927835"
+         id="stop1521" />
+      <stop
+         style="stop-color:#86bd1f;stop-opacity:0.85380119;"
+         offset="1"
+         id="stop1489" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient1483">
+      <stop
+         style="stop-color:#0000df;stop-opacity:0.15269461;"
+         offset="0"
+         id="stop1479" />
+      <stop
+         style="stop-color:#ff3555;stop-opacity:0.92105263;"
+         offset="0.41852325"
+         id="stop1511" />
+      <stop
+         style="stop-color:#ff5555;stop-opacity:0.5409357;"
+         offset="0.99793816"
+         id="stop1481" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient1483"
+       id="linearGradient1485"
+       x1="71.754562"
+       y1="174.67593"
+       x2="182.68581"
+       y2="174.67593"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       xlink:href="#linearGradient1499"
+       id="linearGradient1503"
+       x1="31.826059"
+       y1="145.95589"
+       x2="92.197296"
+       y2="145.95589"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       xlink:href="#linearGradient1491"
+       id="linearGradient1509"
+       x1="143.20213"
+       y1="148.66096"
+       x2="246.18414"
+       y2="148.66096"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-47.283531,-83.235886)">
+    <g
+       id="g1631"
+       transform="translate(15.457473,-10.047358)">
+      <text
+         xml:space="preserve"
+         style="font-size:146.667px;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic, Normal';fill:url(#linearGradient1503);fill-opacity:1;stroke-width:8;stroke-linejoin:bevel;stroke-dasharray:66.7743, 16.6936, 8.34678, 16.6936"
+         x="18.935404"
+         y="198.62854"
+         id="text868"><tspan
+           id="tspan866"
+           x="18.935404"
+           y="198.62854"
+           style="fill:url(#linearGradient1503);fill-opacity:1">E</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:146.667px;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic, Normal';fill:url(#linearGradient1485);fill-opacity:1;stroke-width:8;stroke-linejoin:bevel;stroke-dasharray:66.7743, 16.6936, 8.34678, 16.6936"
+         x="63.375637"
+         y="224.51981"
+         id="text872"><tspan
+           id="tspan870"
+           x="63.375637"
+           y="224.51981"
+           style="fill:url(#linearGradient1485);fill-opacity:1">Q</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:146.667px;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic, Normal';fill:url(#linearGradient1509);fill-opacity:1;stroke-width:8;stroke-linejoin:bevel;stroke-dasharray:66.7743, 16.6936, 8.34678, 16.6936"
+         x="135.2529"
+         y="201.33362"
+         id="text876"><tspan
+           id="tspan874"
+           x="135.2529"
+           y="201.33362"
+           style="fill:url(#linearGradient1509);fill-opacity:1">C</tspan></text>
+    </g>
+  </g>
+</svg>

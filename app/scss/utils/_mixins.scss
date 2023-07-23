@@ -1,0 +1,26 @@
+@mixin set-font($font-family, $file-path, $weight: normal, $style: normal) {
+	@font-face {
+		font-family: $font-family;
+		font-weight: $weight;
+		font-style: $style;
+
+        src: url('#{$file-path}.eot');
+        src:
+            url('#{$file-path}.eot?#iefix') format('embedded-opentype'),
+            url('#{$file-path}.woff2') format('woff2'),
+            url('#{$file-path}.woff') format('woff'),
+            url('#{$file-path}.ttf') format('truetype');
+    }
+}
+
+@mixin init-fonts($data) {
+    @each $font, $items in $data {
+        @each $fonts, $rules in $items {
+            
+            $font-weight: map-get($data, $font, $fonts, 'font-weight') or 'normal';
+            $font-style: map-get($data, $font, $fonts, 'font-style') or 'normal';
+
+            @include set-font($font, '../fonts/#{$font}/#{$fonts}', $font-weight, $font-style);
+        }
+    }
+}

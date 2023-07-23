@@ -1,0 +1,68 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: $base-ff;
+}
+
+input,
+textarea,
+button,
+select {
+    background: none;
+    border: none;
+    outline: none;
+    font: inherit;
+    color: inherit;
+}
+
+input,
+textarea {
+    &::placeholder {
+        font: inherit;
+        color: inherit;
+    }
+}
+
+button {
+    cursor: pointer;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+html {
+    font-size: $root-fs;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    color: $base-color;
+    font: {
+        style: normal;
+        weight: $base-fw;
+        size: $base-fs;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: $link;
+    &:hover {
+        color: $link-hover;
+    }
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+img {
+    object-fit: cover;
+    object-position: center;
+    height: auto;
+}

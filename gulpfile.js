@@ -1,4 +1,6 @@
 /*
+    ? Author: Mihail Rachev
+
 	! Версии для корректной работы 
     * Gulp 4 - 4.0.2v
 	* Node.js - 18.12.1v
@@ -148,7 +150,7 @@ function watching() {
 
     watch([
         "app/libs/**/*.js",
-        "app/js/common.js"
+        "app/js/common.js",
     ], scripts).on("change", browser.reload);
 
     watch([

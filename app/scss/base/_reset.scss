@@ -5,6 +5,11 @@
     font-family: $base-ff;
 }
 
+:root {
+    font-size: $root-fs;
+    accent-color: $accent-color;
+}
+
 input,
 textarea,
 button,
@@ -31,10 +36,6 @@ button {
 body,
 html {
     height: 100%;
-}
-
-html {
-    font-size: $root-fs;
 }
 
 body {

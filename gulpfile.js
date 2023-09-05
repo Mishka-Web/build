@@ -1,47 +1,57 @@
 /*
-    ? Author: Mihail Rachev
+	? Author: Mihail Rachev
 
 	! Версии для корректной работы 
-    * Gulp 4 - 4.0.2v
+	* Gulp 4 - 4.0.2v
 	* Node.js - 18.12.1v
 	* npm - 8.19.2v
 */
+
+/** Configuration for FTP and JavaScript libs **/
+const CONFIG = {
+	ftp: {
+		login: "",
+		pass: "",
+		host: "",
+		port: 21,
+		localFiles: ["./dist/**/*"],
+		remoteFolder: "/www/"
+	},
+	JS: {
+		libs: [
+			"app/libs/jquery/jquery.min.js",
+			"app/js/common.js"
+		]
+	}
+}
 
 // Подключение модулей(плагинов)
 const { src, dest, parallel, series, watch } = require("gulp"),
 	concat = require("gulp-concat"),
 	rename = require("gulp-rename"),
 	csso = require("gulp-csso"),
-	imagemin = require("gulp-imagemin"),
-	autoprefixer = require("gulp-autoprefixer"),
+	imageMin = require("gulp-imagemin"),
+	autoPrefixer = require("gulp-autoprefixer"),
 	sass = require("gulp-sass")(require("sass")),
 	notify = require("gulp-notify"),
 	pug = require("gulp-pug"),
 	uglify = require("gulp-uglify"),
 	del = require("del"),
 	cache = require("gulp-cache"),
-	gutil = require("gulp-util"),
+	gUtil = require("gulp-util"),
 	ftp = require("vinyl-ftp");
 
 // Создание модуля 'browser-sync'
 const browser = require("browser-sync").create();
 
-/** Конфигурация для FTP **/
-const login = "";
-const password = "";
-const host = "";
-const port = 21;
-const localFilesGlob = ["./dist/**/*"];
-const remoteFolder = "/www";
-
 // Функция для подключения к FTP серверу
 function getFtpConn() {
 	return ftp.create({
-		host: host,
-		port: port,
-		user: login,
-		password: password,
-		log: gutil.log,
+		host: CONFIG.ftp.host,
+		port: CONFIG.ftp.port,
+		user: CONFIG.ftp.login,
+		password: CONFIG.ftp.pass,
+		log: gUtil.log,
 	});
 }
 
@@ -65,7 +75,7 @@ function styles() {
 		)
 		.pipe(csso())
 		.pipe(
-			autoprefixer({
+			autoPrefixer({
 				overrideBrowserslist: ["last 10 version"],
 				grid: true,
 			})
@@ -87,7 +97,7 @@ function html() {
 
 // Отслеживание изменений в скриптах(JS)
 function scripts() {
-	return src(["app/libs/jquery/jquery.min.js", "app/js/common.js"])
+	return src(CONFIG.JS.libs)
 		.pipe(concat("scripts.min.js"))
 		.pipe(uglify())
 		.pipe(dest("app/js"))
@@ -96,12 +106,12 @@ function scripts() {
 
 // Сжатие и кэширование изображений
 function images() {
-	return src("app/img/**/*").pipe(cache(imagemin())).pipe(dest("dist/img/"));
+	return src("app/img/**/*").pipe(cache(imageMin())).pipe(dest("dist/img/"));
 }
 
 // Удаление всех элементов в папке dist/
 function cleanDist() {
-	return del("dist");
+	return del("dist/");
 }
 
 // Инициализация и настройка параметров модуля 'browserSync'
@@ -131,9 +141,9 @@ function build() {
 function deploy() {
 	const conn = getFtpConn();
 
-	return src(localFilesGlob, { base: "dist/", buffer: false })
-		.pipe(conn.newer(remoteFolder))
-		.pipe(conn.dest(remoteFolder));
+	return src(CONFIG.ftp.localFiles, { base: "dist/", buffer: false })
+		.pipe(conn.newer(CONFIG.ftp.remoteFolder))
+		.pipe(conn.dest(CONFIG.ftp.remoteFolder));
 }
 
 // Отслеживание изменений в файлах и папках(вложенных)
@@ -147,6 +157,9 @@ function watching() {
 			"app/scss/utils/**/*.scss",
 			"app/scss/**/*.scss",
 		],
+		{
+			delay: 500,
+		},
 		styles
 	);
 
@@ -164,6 +177,9 @@ function watching() {
 			"app/pug/utils/**/*.pug",
 			"app/pug/**/*.pug",
 		],
+		{
+			delay: 500,
+		},
 		html
 	);
 

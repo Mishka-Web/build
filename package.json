@@ -2,6 +2,7 @@
   "name": "Mihail Rachev",
   "version": "2.0.0",
   "description": "",
+  "module": "true",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

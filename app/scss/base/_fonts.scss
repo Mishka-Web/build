@@ -1,14 +1,17 @@
 @include init-fonts(
 	(
-		"NunitoSans": (
-			"NunitoSans-ExtraBold": (
-				"font-weight": 800,
+		"SegoeUI": (
+			"SegoeUI-Bold": (
+				"font-weight": 700,
 			),
-			"NunitoSans-SemiBold": (
+			"SegoeUI-SemiBold": (
 				"font-weight": 600,
 			),
-			"NunitoSans-Regular": (
+			"SegoeUI-Regular": (
 				"font-weight": 400,
+			),
+			"SegoeUI-Light": (
+				"font-weight": 300,
 			),
 		),
 	)

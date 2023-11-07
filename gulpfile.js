@@ -15,11 +15,14 @@ const CONFIG = {
 		host: "",
 		port: 21,
 		localFiles: ["./dist/**/*"],
-		remoteFolder: "/www/"
+		remoteFolder: ""
 	},
 	JS: {
 		libs: [
 			"app/libs/jquery/jquery.min.js",
+			"app/libs/jquery/plugins/Inputmask-5.x/dist/jquery.inputmask.min.js",
+			"app/libs/jquery/plugins/jquery-validation/dist/jquery.validate.min.js",
+			"app/libs/swiper/js/swiper.min.js",
 			"app/js/common.js"
 		]
 	}
@@ -86,7 +89,7 @@ function styles() {
 
 // Отслеживание изменений в структуре 'Pug(Jade)' файлах.
 function html() {
-	return src(["app/pug/*.pug", "!app/pug/**/_*.pug"])
+	return src(["app/pug/*.pug", "app/pug/pages/*.pug", "!app/pug/**/_*.pug"])
 		.pipe(
 			pug({
 				pretty: true,
@@ -158,7 +161,7 @@ function watching() {
 			"app/scss/**/*.scss",
 		],
 		{
-			delay: 500,
+			delay: 750,
 		},
 		styles
 	);
@@ -178,14 +181,14 @@ function watching() {
 			"app/pug/**/*.pug",
 		],
 		{
-			delay: 500,
+			delay: 750,
 		},
 		html
 	);
 
 	watch("app/*.html").on("change", browser.reload);
-
-	watch("app/**/*", series(cleanDist, build));
+	
+	// watch("app/**/*", series(cleanDist, images, build));
 }
 
 // Задачи gulp

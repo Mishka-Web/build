@@ -2,7 +2,13 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: $base-ff;
+	scroll-behavior: smooth;
+	-webkit-appearance: none;
+
+	*::selection {
+		color: $text-selection-color;
+		background-color: $bg-selection-color;
+	}
 }
 
 :root {
@@ -19,6 +25,7 @@ select {
 	outline: none;
 	font: inherit;
 	color: inherit;
+	-webkit-tap-highlight-color: transparent;
 }
 
 input,
@@ -46,11 +53,13 @@ body {
 		style: normal;
 		weight: $base-fw;
 		size: $base-fs;
+		family: $base-ff;
 	}
 }
 
 a {
 	text-decoration: none;
+	text-decoration-skip-ink: none;
 	color: $link;
 
 	&:hover {

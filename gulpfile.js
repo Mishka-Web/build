@@ -15,37 +15,32 @@ const CONFIG = {
 		host: "",
 		port: 21,
 		localFiles: ["./dist/**/*"],
-		remoteFolder: ""
+		remoteFolder: "",
 	},
 	JS: {
 		libs: [
 			"app/libs/jquery/jquery.min.js",
-			"app/libs/jquery/plugins/Inputmask-5.x/dist/jquery.inputmask.min.js",
-			"app/libs/jquery/plugins/jquery-validation/dist/jquery.validate.min.js",
-			"app/libs/swiper/js/swiper.min.js",
-			"app/js/common.js"
-		]
-	}
-}
+			// "app/libs/jquery/plugins/Inputmask-5.x/dist/jquery.inputmask.min.js",
+			// "app/libs/jquery/plugins/jquery-validation/dist/jquery.validate.min.js",
+			// "app/libs/swiper/js/swiper.min.js",
+		],
+	},
+};
 
 // Подключение модулей(плагинов)
 const { src, dest, parallel, series, watch } = require("gulp"),
-	concat = require("gulp-concat"),
-	rename = require("gulp-rename"),
-	csso = require("gulp-csso"),
-	imageMin = require("gulp-imagemin"),
-	autoPrefixer = require("gulp-autoprefixer"),
 	sass = require("gulp-sass")(require("sass")),
-	notify = require("gulp-notify"),
 	pug = require("gulp-pug"),
 	uglify = require("gulp-uglify"),
+	concat = require("gulp-concat"),
+	imageMin = require("gulp-imagemin"),
+	autoPrefixer = require("gulp-autoprefixer"),
 	del = require("del"),
+	rename = require("gulp-rename"),
 	cache = require("gulp-cache"),
 	gUtil = require("gulp-util"),
-	ftp = require("vinyl-ftp");
-
-// Создание модуля 'browser-sync'
-const browser = require("browser-sync").create();
+	ftp = require("vinyl-ftp"),
+	browser = require("browser-sync").create(); // Создание модуля 'browser-sync'
 
 // Функция для подключения к FTP серверу
 function getFtpConn() {
@@ -60,71 +55,43 @@ function getFtpConn() {
 
 // Отслеживание изменений в 'SASS' файлах и их преобразования в формат 'min.css'.
 function styles() {
-	return src(["app/scss/**/*.scss"])
-		.pipe(
-			sass().on(
-				"error",
-				notify.onError({
-					message: "<%= error.message %>",
-					title: "Sass Error!",
-				})
-			)
-		)
-		.pipe(sass({ outputStyle: "compressed" }))
-		.pipe(
-			rename(function (e) {
-				e.extname = ".min.css";
-			})
-		)
-		.pipe(csso())
-		.pipe(
-			autoPrefixer({
-				overrideBrowserslist: ["last 10 version"],
-				grid: true,
-			})
-		)
-		.pipe(dest("app/css"))
-		.pipe(browser.stream());
+	return (
+		src(["app/scss/main.scss"])
+			.pipe(sass({ outputStyle: "compressed" }).on('error', sass.logError))
+			.pipe(autoPrefixer({ overrideBrowserslist: ["last 8 version"], grid: true }))
+			.pipe(rename(function (e) { e.extname = ".min.css" }))
+			.pipe(dest("app/css"))
+			.pipe(browser.stream())
+	);
 }
 
-// Отслеживание изменений в структуре 'Pug(Jade)' файлах.
+// Отслеживание изменений в структуре 'Pug(ex Jade)' файлах.
 function html() {
 	return src(["app/pug/*.pug", "app/pug/pages/*.pug", "!app/pug/**/_*.pug"])
-		.pipe(
-			pug({
-				pretty: true,
-			})
-		)
+		.pipe(pug({ pretty: true }))
 		.pipe(dest("app/"));
 }
 
 // Отслеживание изменений в скриптах(JS)
 function scripts() {
-	return src(CONFIG.JS.libs)
+	return src([...CONFIG.JS.libs, "app/js/common.js"])
 		.pipe(concat("scripts.min.js"))
 		.pipe(uglify())
 		.pipe(dest("app/js"))
-		.pipe(browser.reload({ stream: true }));
+		.pipe(browser.stream());
 }
 
 // Сжатие и кэширование изображений
 function images() {
-	return src("app/img/**/*").pipe(cache(imageMin())).pipe(dest("dist/img/"));
+	return src("app/img/**/*")
+		.pipe(cache())
+		.pipe(imageMin())
+		.pipe(dest("dist/img/"));
 }
 
 // Удаление всех элементов в папке dist/
 function cleanDist() {
 	return del("dist/");
-}
-
-// Инициализация и настройка параметров модуля 'browserSync'
-function browserSync() {
-	browser.init({
-		server: {
-			baseDir: "app",
-		},
-		notify: false,
-	});
 }
 
 // Сборка всех элементов для работы приложения в папку
@@ -135,71 +102,44 @@ function build() {
 			"app/css/main.min.css",
 			"app/*.html",
 			"app/fonts/**/*",
-		],
-		{ base: "app" }
-	).pipe(dest("dist/"));
+		], { base: "app" })
+		.pipe(dest("dist/"));
+}
+
+// Инициализация и настройка параметров модуля 'browser-sync'
+function browserSync() {
+	browser.init({
+		server: {
+			baseDir: "app",
+		},
+		notify: false,
+	});
+}
+
+// Отслеживание изменений в файлах и папках(вложенных)
+function watching() {
+	watch("app/scss/main.scss", styles);
+
+	watch(["app/libs/**/*.js", "app/js/common.js"], scripts).on("change", browser.reload);
+
+	watch("app/pug/**/*.pug", html);
+
+	watch("app/*.html").on("change", browser.reload);
+
+	// watch("app/**/*", series(cleanDist, images, build));
 }
 
 // Деплой проекта
 function deploy() {
 	const conn = getFtpConn();
-
 	return src(CONFIG.ftp.localFiles, { base: "dist/", buffer: false })
 		.pipe(conn.newer(CONFIG.ftp.remoteFolder))
 		.pipe(conn.dest(CONFIG.ftp.remoteFolder));
 }
 
-// Отслеживание изменений в файлах и папках(вложенных)
-function watching() {
-	watch(
-		[
-			"app/scss/*.scss",
-			"app/scss/base/**/*.scss",
-			"app/scss/components/**/*.scss",
-			"app/scss/layout/**/*.scss",
-			"app/scss/utils/**/*.scss",
-			"app/scss/**/*.scss",
-		],
-		{
-			delay: 750,
-		},
-		styles
-	);
-
-	watch(["app/libs/**/*.js", "app/js/common.js"], scripts).on(
-		"change",
-		browser.reload
-	);
-
-	watch(
-		[
-			"app/pug/*.pug",
-			"app/pug/components/**/*.pug",
-			"app/pug/layout/**/*.pug",
-			"app/pug/sample/**/*.pug",
-			"app/pug/utils/**/*.pug",
-			"app/pug/**/*.pug",
-		],
-		{
-			delay: 750,
-		},
-		html
-	);
-
-	watch("app/*.html").on("change", browser.reload);
-	
-	// watch("app/**/*", series(cleanDist, images, build));
-}
-
 // Задачи gulp
-exports.deploy = series(build, deploy);
+exports.deploy = series(cleanDist, images, build, deploy);
 
 exports.build = series(cleanDist, images, build);
 
 exports.default = parallel(html, styles, scripts, browserSync, watching);
-
-exports.cleanDist = cleanDist;
-
-exports.clearCache = () => {
-	return cache.clearAll();
-};

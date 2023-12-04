@@ -1,17 +1,8 @@
 @include init-fonts(
 	(
-		"SegoeUI": (
-			"SegoeUI-Bold": (
-				"font-weight": 700,
-			),
-			"SegoeUI-SemiBold": (
-				"font-weight": 600,
-			),
-			"SegoeUI-Regular": (
+		"Font": (
+			"Font-Regular": (
 				"font-weight": 400,
-			),
-			"SegoeUI-Light": (
-				"font-weight": 300,
 			),
 		),
 	)

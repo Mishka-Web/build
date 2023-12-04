@@ -3,9 +3,8 @@
 	margin: 0;
 	box-sizing: border-box;
 	scroll-behavior: smooth;
-	-webkit-appearance: none;
 
-	*::selection {
+	::selection {
 		color: $text-selection-color;
 		background-color: $bg-selection-color;
 	}

@@ -34,6 +34,8 @@ const { src, dest, parallel, series, watch } = require("gulp"),
 	uglify = require("gulp-uglify"),
 	concat = require("gulp-concat"),
 	imageMin = require("gulp-imagemin"),
+	uncss = require("gulp-uncss"),
+	cleanCSS = require("gulp-clean-css"),
 	autoPrefixer = require("gulp-autoprefixer"),
 	del = require("del"),
 	rename = require("gulp-rename"),
@@ -58,6 +60,8 @@ function styles() {
 	return (
 		src(["app/scss/main.scss"])
 			.pipe(sass({ outputStyle: "compressed" }).on('error', sass.logError))
+			.pipe(uncss({ html: ['./app/*.html'] }))
+			.pipe(cleanCSS({ level: { 1: { specialComments: 0 } } }))
 			.pipe(autoPrefixer({ overrideBrowserslist: ["last 8 version"], grid: true }))
 			.pipe(rename(function (e) { e.extname = ".min.css" }))
 			.pipe(dest("app/css"))
@@ -84,8 +88,7 @@ function scripts() {
 // Сжатие и кэширование изображений
 function images() {
 	return src("app/img/**/*")
-		.pipe(cache())
-		.pipe(imageMin())
+		.pipe(cache(imageMin()))
 		.pipe(dest("dist/img/"));
 }
 
@@ -126,7 +129,7 @@ function watching() {
 
 	watch("app/*.html").on("change", browser.reload);
 
-	// watch("app/**/*", series(cleanDist, images, build));
+	watch("app/**/*", series(cleanDist, images, build));
 }
 
 // Деплой проекта

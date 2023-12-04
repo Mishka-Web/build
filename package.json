@@ -25,6 +25,7 @@
     "gulp-rsync": "^0.0.9",
     "gulp-sass": "^5.1.0",
     "gulp-uglify": "^3.0.2",
+    "gulp-uncss": "^1.0.6",
     "gulp-util": "^3.0.8",
     "pug": "^3.0.2",
     "sass": "^1.52.1",

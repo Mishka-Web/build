@@ -1,0 +1,7 @@
+@supports ((position: sticky) or (position: -webkit-sticky)) {
+	.elem,
+	.elem_fix {
+		position: -webkit-sticky;
+		position: sticky;
+	}
+}

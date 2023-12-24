@@ -1,5 +1,5 @@
 $root-fs: 10px !default;
-$base-fs: 1.8rem !default;
+$base-fs: 1.6rem !default;
 $base-fw: 400 !default;
 $base-ff: "Segoe UI", sans-serif !default;
 $base-trn: all 0.15s ease-in 0s !default;
@@ -7,12 +7,6 @@ $base-trn: all 0.15s ease-in 0s !default;
 $base-color: #000000;
 $main-color: #ff6500;
 $color-1: #ffffff;
-$color-2: #666666;
-$color-3: #efefef;
-$color-4: #f2f2f2;
-$color-5: #164073;
-$color-6: #333333;
-$color-7: rgba(102, 102, 102, 0.3);
 
 $accent-color: $main-color;
 $bg-selection-color: $main-color;
@@ -20,14 +14,5 @@ $text-selection-color: $color-1;
 $link: $base-color;
 
 $trn-1: all 0.225s ease-in-out 0s;
-$trn-2: all 0.35s ease-out 0s;
-$trn-3: all 0.4s ease-in-out 0s;
 
 $shadow-1: 0.4rem 0.4rem 0 0 rgba(255, 101, 0, 0.7);
-$shadow-2: rgba(0, 0, 0, 0.1) 0 0.4rem 1.2rem;
-$shadow-3: 4px 4px 0 0 rgba(255, 101, 0, 0.7);
-$shadow-4: 1.1rem 1.1rem 0 0 $main-color;
-$shadow-5: rgba(100, 100, 111, 0.2) 0 0.7rem 2.9rem 0;
-$shadow-6: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.25);
-$shadow-7: 0.5rem 0.5rem 0.5rem 0 rgba(0, 0, 0, 0.1);
-$shadow-8: 0.45rem 0 0.2rem 0 rgba(0, 0, 0, 0.1);

@@ -60,7 +60,7 @@ function styles() {
 		src(["app/scss/main.scss"])
 			.pipe(sass({ outputStyle: "compressed" }).on('error', sass.logError))
 			.pipe(cleanCSS({ level: { 1: { specialComments: 0 } } }))
-			.pipe(autoPrefixer({ overrideBrowserslist: ["last 8 version"], grid: true }))
+			.pipe(autoPrefixer({ overrideBrowserslist: ["last 3 version"], grid: true }))
 			.pipe(rename(function (e) { e.extname = ".min.css" }))
 			.pipe(dest("app/css"))
 			.pipe(browser.stream())

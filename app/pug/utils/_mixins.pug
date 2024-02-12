@@ -1,0 +1,9 @@
+mixin nav-list(list=[]) 
+	ul 
+		each item in list
+			if item.active
+				li.active
+					a(href=item.link)= item.text 
+			else
+				li
+					a(href=item.link)= item.text 

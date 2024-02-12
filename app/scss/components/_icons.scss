@@ -1,0 +1,10 @@
+.icon {
+	display: inline-flex;
+	flex-shrink: 0;
+	width: 2rem;
+	height: auto;
+	object-fit: contain;
+	user-select: none;
+	pointer-events: none;
+	transition: $base-trn;
+}

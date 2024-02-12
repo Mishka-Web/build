@@ -18,12 +18,7 @@ const CONFIG = {
 		remoteFolder: "",
 	},
 	JS: {
-		libs: [
-			"app/libs/jquery/jquery.min.js",
-			// "app/libs/jquery/plugins/Inputmask-5.x/dist/jquery.inputmask.min.js",
-			// "app/libs/jquery/plugins/jquery-validation/dist/jquery.validate.min.js",
-			// "app/libs/swiper/js/swiper.min.js",
-		],
+		libs: ["app/libs/jquery/jquery.min.js"],
 	},
 };
 
@@ -56,15 +51,22 @@ function getFtpConn() {
 
 // Отслеживание изменений в 'SASS' файлах и их преобразования в формат 'min.css'.
 function styles() {
-	return (
-		src(["app/scss/main.scss"])
-			.pipe(sass({ outputStyle: "compressed" }).on('error', sass.logError))
-			.pipe(cleanCSS({ level: { 1: { specialComments: 0 } } }))
-			.pipe(autoPrefixer({ overrideBrowserslist: ["last 3 version"], grid: true }))
-			.pipe(rename(function (e) { e.extname = ".min.css" }))
-			.pipe(dest("app/css"))
-			.pipe(browser.stream())
-	);
+	return src(["app/scss/main.scss"])
+		.pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+		.pipe(cleanCSS({ level: { 1: { specialComments: 0 } } }))
+		.pipe(
+			autoPrefixer({
+				overrideBrowserslist: ["last 3 version"],
+				grid: true,
+			})
+		)
+		.pipe(
+			rename(function (e) {
+				e.extname = ".min.css";
+			})
+		)
+		.pipe(dest("app/css"))
+		.pipe(browser.stream());
 }
 
 // Отслеживание изменений в структуре 'Pug(ex Jade)' файлах.
@@ -85,9 +87,7 @@ function scripts() {
 
 // Сжатие и кэширование изображений
 function images() {
-	return src("app/img/**/*")
-		.pipe(cache(imageMin()))
-		.pipe(dest("dist/img/"));
+	return src("app/img/**/*").pipe(cache(imageMin())).pipe(dest("dist/img/"));
 }
 
 // Удаление всех элементов в папке dist/
@@ -103,8 +103,9 @@ function build() {
 			"app/css/main.min.css",
 			"app/*.html",
 			"app/fonts/**/*",
-		], { base: "app" })
-		.pipe(dest("dist/"));
+		],
+		{ base: "app" }
+	).pipe(dest("dist/"));
 }
 
 // Инициализация и настройка параметров модуля 'browser-sync'
@@ -119,15 +120,21 @@ function browserSync() {
 
 // Отслеживание изменений в файлах и папках(вложенных)
 function watching() {
-	watch(["app/scss/main.scss", "app/scss/**/*.scss"], styles);
+	watch(
+		["app/scss/main.scss", "app/scss/**/*.scss"],
+		{ usePolling: true },
+		styles
+	);
 
-	watch(["app/libs/**/*.js", "app/js/common.js"], scripts).on("change", browser.reload);
+	watch(
+		["app/libs/**/*.js", "app/js/common.js"],
+		{ usePolling: true },
+		scripts
+	).on("change", browser.reload);
 
-	watch("app/pug/**/*.pug", html);
+	watch(["app/pug/*.pug", "app/pug/**/*.pug"], { usePolling: true }, html);
 
-	watch("app/*.html").on("change", browser.reload);
-
-	watch("app/**/*", series(cleanDist, images, build));
+	watch("app/*.html", { usePolling: true }).on("change", browser.reload);
 }
 
 // Деплой проекта

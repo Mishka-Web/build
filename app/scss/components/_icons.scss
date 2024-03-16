@@ -1,6 +1,9 @@
 .icon {
 	display: inline-flex;
-	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	flex: 0 0 auto;
 	width: 2rem;
 	height: auto;
 	object-fit: contain;

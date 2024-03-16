@@ -16,6 +16,8 @@ const CONFIG = {
 		port: 21,
 		localFiles: ["./dist/**/*"],
 		remoteFolder: "",
+		secure: true,
+		log: gUtil.log,
 	},
 	JS: {
 		libs: ["app/libs/jquery/jquery.min.js"],
@@ -45,6 +47,7 @@ function getFtpConn() {
 		port: CONFIG.ftp.port,
 		user: CONFIG.ftp.login,
 		password: CONFIG.ftp.pass,
+		parallel: 10,
 		log: gUtil.log,
 	});
 }

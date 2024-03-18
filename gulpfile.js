@@ -16,8 +16,6 @@ const CONFIG = {
 		port: 21,
 		localFiles: ["./dist/**/*"],
 		remoteFolder: "",
-		secure: true,
-		log: gUtil.log,
 	},
 	JS: {
 		libs: ["app/libs/jquery/jquery.min.js"],

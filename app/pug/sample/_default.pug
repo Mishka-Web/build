@@ -2,20 +2,20 @@ block tools
 
 doctype html
 html(lang="ru")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
-        link(rel="stylesheet", href="css/main.min.css")
-        block title
-    body
+	head
+		meta(charset="UTF-8")
+		meta(http-equiv="X-UA-Compatible" content="IE=edge")
+		meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
+		link(rel="stylesheet" href="css/main.min.css")
+		block title
+	body
 
-        include ../layout/_header
+		include ../layout/_header
 
 		main.main
 			.wrapper
-        		block main
+				block main
 
-        include ../layout/_footer
-            
-        script(src="js/scripts.min.js")
+		include ../layout/_footer
+
+		script(src="js/scripts.min.js")

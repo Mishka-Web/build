@@ -15,15 +15,15 @@
 	white-space: nowrap;
 	border-radius: 1rem;
 	padding: 0 1.5rem;
-}
 
-// Fix hover for touch devices
-@media (hover: hover) {
-    #{$this}:hover {
-    }
-}
-
-@media (hover: none) {
-    #{$this}:hover {
-    }
+	// Fix hover for touch devices
+	@media (hover: hover) {
+		#{$this}:hover {
+		}
+	}
+	
+	@media (hover: none) {
+		#{$this}:hover {
+		}
+	}
 }

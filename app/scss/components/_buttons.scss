@@ -1,0 +1,32 @@
+.btn {
+	$this: &;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem 1.6rem;
+	flex: 0 0 auto;
+	text-align: center;
+	text-decoration: none;
+	transition: $base-trn;
+	font-size: 1.6rem;
+	min-height: 4.4rem;
+	font-weight: 600;
+	white-space: nowrap;
+	background-color: $color-6;
+	border-radius: 1rem;
+	padding: 0 1.5rem;
+}
+
+// Fix hover for touch devices
+@media (hover: hover) {
+    #{$this}:hover {
+        background-color: $color-6;
+    }
+}
+
+@media (hover: none) {
+    #{$this}:hover {
+        background-color: $color-6;
+    }
+}

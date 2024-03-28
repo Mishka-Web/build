@@ -10,12 +10,12 @@
 /** Configuration for FTP and JavaScript libs **/
 const CONFIG = {
 	ftp: {
-		login: "",
-		pass: "",
-		host: "",
+		login: "c18416_frontend",
+		pass: "AixNUP1LwHXhfujc",
+		host: "h12.netangels.ru",
 		port: 21,
 		localFiles: ["./dist/**/*"],
-		remoteFolder: "",
+		remoteFolder: "/www/ledTs/",
 	},
 	JS: {
 		libs: ["app/libs/jquery/jquery.min.js"],

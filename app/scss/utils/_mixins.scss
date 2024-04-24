@@ -5,7 +5,8 @@
 		font-style: $style;
 
 		src: url("#{$file-path}.eot");
-		src: url("#{$file-path}.eot?#iefix") format("embedded-opentype"),
+		src:
+			url("#{$file-path}.eot?#iefix") format("embedded-opentype"),
 			url("#{$file-path}.woff2") format("woff2"),
 			url("#{$file-path}.woff") format("woff"),
 			url("#{$file-path}.eot") format("eot"),
@@ -17,17 +18,46 @@
 @mixin init-fonts($data) {
 	@each $font, $items in $data {
 		@each $fonts, $rules in $items {
-			$font-weight: map-get($data, $font, $fonts, "font-weight") or
-				"normal";
-			$font-style: map-get($data, $font, $fonts, "font-style") or
-				"normal";
+			$font-weight: map-get($data, $font, $fonts, "font-weight") or "normal";
+			$font-style: map-get($data, $font, $fonts, "font-style") or "normal";
 
-			@include set-font(
-				$font,
-				"../fonts/#{$font}/#{$fonts}",
-				$font-weight,
-				$font-style
-			);
+			@include set-font($font, "../fonts/#{$font}/#{$fonts}", $font-weight, $font-style);
 		}
 	}
+}
+
+@mixin mq($width, $type: 'max') {
+	@if map_has_key($breakpoints, $width) {
+		$width: map_get($breakpoints, $width);
+		@if $type == 'max' {
+			$width: $width - 1px;
+		}
+		@media only screen and (#{$type}-width: $width) {
+			@content;
+		}
+	}
+}
+
+@mixin hardware($backface: true, $perspective: 1000) {
+	@if $backface {
+		backface-visibility: hidden;
+	}
+	perspective: $perspective;
+}
+
+@mixin truncate($truncation-boundary) {
+	max-width: $truncation-boundary;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@mixin box($w, $h: $w) {
+	inline-size: $w;
+	block-size: $h;
+}
+
+@mixin circle($w, $h: $w) {
+	@include box($w, $h);
+	border-radius: 50%;
 }

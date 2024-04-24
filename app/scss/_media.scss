@@ -1,10 +1,20 @@
-@media (min-width: 1600px) {
+$breakpoints: (
+	mobile: 576px,
+	tablet: 768px,
+	tablet-wide: 992px,
+	laptop: 1200px,
+	desktop-small: 1400px,
+	desktop: 1600px,
+	desktop-wide: 1800px
+);
+
+@include mq("desktop", min) {
 	.container {
 		max-width: 1500px;
 	}
 }
 
-@media (min-width: 1800px) {
+@include mq("desktop-wide", min) {
 	.container {
 		max-width: 1660px;
 	}

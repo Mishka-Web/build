@@ -1,0 +1,26 @@
+.main-title {
+
+}
+
+.title {
+
+}
+
+.subtitle {
+
+}
+
+.text {
+
+}
+
+.content {
+	& > * {
+		display: block;
+
+		&:not(:last-child) {
+			margin-bottom: 2rem;
+		}
+	}
+}
+

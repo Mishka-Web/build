@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 	scroll-behavior: smooth;
 
-	::selection {
+	&::selection {
 		color: $text-selection-color;
 		background-color: $bg-selection-color;
 	}
@@ -13,6 +13,8 @@
 :root {
 	font-size: $root-fs;
 	accent-color: $accent-color;
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
 }
 
 input,
@@ -55,11 +57,6 @@ textarea {
 	appearance: none;
 	outline: 0;
 	box-shadow: none;
-}
-
-html {
-	-webkit-text-size-adjust: 100%;
-	text-size-adjust: 100%;
 }
 
 body,

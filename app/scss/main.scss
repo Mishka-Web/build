@@ -1,8 +1,8 @@
 // Utilities
-@use "utils/_vars";
-@use "utils/_supports";
-@use "utils/_functions";
-@use "utils/_mixins";
+@import "utils/_vars";
+@import "utils/_supports";
+@import "utils/_functions";
+@import "utils/_mixins";
 
 // Basics
 @import "base/_libs";

@@ -3,26 +3,18 @@ $breakpoints: (
 	tablet: 768px,
 	tablet-wide: 992px,
 	laptop: 1200px,
-	desktop-small: 1400px,
-	desktop: 1600px,
-	desktop-wide: 1800px
+	desktop: 1400px
 );
 
-@include mq("desktop-wide", min) {
+@include mq("mobile", min) {
 	.container {
-		max-width: 1660px;
+		--bs-gutter-x: 0;
 	}
 }
 
 @include mq("desktop", min) {
 	.container {
-		max-width: 1500px;
-	}
-}
-
-@include mq("mobile", min) {
-	.container {
-		--bs-gutter-x: 0;
+		max-width: 1256px;
 	}
 }
 

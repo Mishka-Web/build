@@ -15,6 +15,8 @@
 	accent-color: $accent-color;
 	-webkit-text-size-adjust: 100%;
 	text-size-adjust: 100%;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
 }
 
 input,

@@ -1,5 +1,5 @@
 /*
-	? Author: Richer
+	? Автор: Richer
 
 	! Версии для корректной работы 
 	* Gulp 4 - 4.0.2v
@@ -9,7 +9,7 @@
 
 const rootDirLibs = "./node_modules";
 
-/** Configuration for FTP and JavaScript libs **/
+/** Настройка библиотек JavaScript и FTP  **/
 const CONFIG = {
 	ftp: {
 		login: "",

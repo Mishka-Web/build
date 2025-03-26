@@ -1,5 +1,5 @@
 /*
-	? Автор: Richer
+	? Author: Mihail Rachev
 
 	! Версии для корректной работы 
 	* Gulp 4 - 4.0.2v
@@ -7,9 +7,7 @@
 	* npm - 8.19.2v
 */
 
-const rootDirLibs = "./node_modules";
-
-/** Настройка библиотек JavaScript и FTP  **/
+/** Configuration for FTP and JavaScript libs **/
 const CONFIG = {
 	ftp: {
 		login: "",
@@ -20,7 +18,7 @@ const CONFIG = {
 		remoteFolder: "",
 	},
 	JS: {
-		libs: [rootDirLibs + "/jquery/dist/jquery.min.js"],
+		libs: ["app/libs/jquery/jquery.min.js"],
 	},
 };
 
@@ -79,10 +77,10 @@ function html() {
 		.pipe(dest("app/"));
 }
 
-// Отслеживание изменений в модулях(JS)
+// Отслеживание изменений в скриптах(JS)
 function scripts() {
-	return src(...CONFIG.JS.libs)
-		.pipe(concat("libs.min.js"))
+	return src([...CONFIG.JS.libs, "app/js/common.js"])
+		.pipe(concat("scripts.min.js"))
 		.pipe(uglify())
 		.pipe(dest("app/js"))
 		.pipe(browser.stream());
@@ -102,8 +100,7 @@ function cleanDist() {
 function build() {
 	return src(
 		[
-			"app/js/libs.min.js",
-			"app/js/common.js",
+			"app/js/scripts.min.js",
 			"app/css/main.min.css",
 			"app/*.html",
 			"app/fonts/**/*",
@@ -130,10 +127,11 @@ function watching() {
 		styles
 	);
 
-	watch("app/libs/**/libs.min.js", { usePolling: true }, scripts).on(
-		"change",
-		browser.reload
-	);
+	watch(
+		["app/libs/**/*.js", "app/js/common.js"],
+		{ usePolling: true },
+		scripts
+	).on("change", browser.reload);
 
 	watch(["app/pug/*.pug", "app/pug/**/*.pug"], { usePolling: true }, html);
 

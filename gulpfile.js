@@ -26,6 +26,7 @@ const CONFIG = {
 const { src, dest, parallel, series, watch } = require("gulp"),
 	sass = require("gulp-sass")(require("sass")),
 	pug = require("gulp-pug"),
+	htmlbeautify = require("gulp-html-beautify"),
 	uglify = require("gulp-uglify"),
 	concat = require("gulp-concat"),
 	imageMin = require("gulp-imagemin"),
@@ -74,6 +75,15 @@ function styles() {
 function html() {
 	return src(["app/pug/*.pug", "app/pug/pages/*.pug", "!app/pug/**/_*.pug"])
 		.pipe(pug({ pretty: true }))
+		.pipe(
+			htmlbeautify({
+				indent_size: 4,
+				eol: "\n",
+				indent_with_tabs: true,
+				end_with_newline: true,
+				jslint_happy: true,
+			})
+		)
 		.pipe(dest("app/"));
 }
 

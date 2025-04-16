@@ -33,6 +33,8 @@
   },
   "dependencies": {
     "caniuse-lite": "^1.0.30001707",
-    "jquery": "^3.7.1"
+    "gulp-html-beautify": "^1.0.1",
+    "jquery": "^3.7.1",
+    "js-beautify": "^1.15.4"
   }
 }

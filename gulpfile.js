@@ -29,8 +29,11 @@ const { src, dest, parallel, series, watch } = require("gulp"),
 	uglify = require("gulp-uglify"),
 	concat = require("gulp-concat"),
 	imageMin = require("gulp-imagemin"),
-	cleanCSS = require("gulp-clean-css"),
-	autoPrefixer = require("gulp-autoprefixer"),
+	// cleanCSS = require("gulp-clean-css"),
+	// autoPrefixer = require("gulp-autoprefixer"),
+	autoprefixer = require("autoprefixer"),
+	postcss = require("gulp-postcss"),
+	cssnano = require("cssnano"),
 	del = require("del"),
 	rename = require("gulp-rename"),
 	cache = require("gulp-cache"),
@@ -52,22 +55,27 @@ function getFtpConn() {
 
 // Отслеживание изменений в 'SASS' файлах и их преобразования в формат 'min.css'.
 function styles() {
-	return src(["app/scss/main.scss"])
-		.pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
-		.pipe(cleanCSS({ level: { 1: { specialComments: 0 } } }))
-		.pipe(
-			autoPrefixer({
-				overrideBrowserslist: ["last 3 version"],
-				grid: true,
-			})
-		)
-		.pipe(
-			rename(function (e) {
-				e.extname = ".min.css";
-			})
-		)
-		.pipe(dest("app/css"))
-		.pipe(browser.stream());
+	return (
+		src(["app/scss/main.scss"])
+			.pipe(
+				sass({ outputStyle: "compressed" }).on("error", sass.logError)
+			)
+			// .pipe(cleanCSS({ level: { 1: { specialComments: 0 } } }))
+			.pipe(postcss([cssnano(), autoprefixer()]))
+			// .pipe(
+			// 	autoPrefixer({
+			// 		overrideBrowserslist: ["last 3 version"],
+			// 		grid: true,
+			// 	})
+			// )
+			.pipe(
+				rename(function (e) {
+					e.extname = ".min.css";
+				})
+			)
+			.pipe(dest("app/css"))
+			.pipe(browser.stream())
+	);
 }
 
 // Отслеживание изменений в структуре 'Pug(ex Jade)' файлах.

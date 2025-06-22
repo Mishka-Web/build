@@ -113,11 +113,16 @@ app/pug/pages/contacts.pug
 Содержание файла:
 
 ```pug
-extends ../sample/_default.pug
+extends ../sample/_default
 
-block content
-  h1 Контакты
-  p Свяжитесь с нами любым удобным способом.
+block tools 
+	include ../utils/_mixins
+
+block title
+	title О нас
+
+block main
+  [...code]
 ```
 
 Gulp скомпилирует это в `contacts.html`.

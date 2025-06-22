@@ -119,10 +119,10 @@ block tools
 	include ../utils/_mixins
 
 block title
-	title О нас
+	title Контакты
 
 block main
-  [...code]
+  	[...code]
 ```
 
 Gulp скомпилирует это в `contacts.html`.
